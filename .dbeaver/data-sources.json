@@ -1,0 +1,67 @@
+{
+	"folders": {},
+	"connections": {
+		"mariaDB-1785ad01a8a-433b2bac732d1f21": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "ufo_db",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "ufo_db",
+				"url": "jdbc:mysql://localhost:3306/ufo_db",
+				"home": "/usr/local/Cellar/mariadb/10.5.9",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		},
+		"mariaDB-1785ad54145-41f7fa95cf855340": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "ufo_sightings",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "ufo_sightings",
+				"url": "jdbc:mysql://localhost:3306/ufo_sightings",
+				"home": "/usr/local/Cellar/mariadb/10.5.9",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		},
+		"mariaDB-1785ad5ece4-35d8f10e721250af": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "ufo_sightings 2",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "3306",
+				"database": "ufo_sightings",
+				"url": "jdbc:mysql://localhost:3306/ufo_sightings",
+				"home": "/usr/local/Cellar/mariadb/10.5.9",
+				"type": "dev",
+				"auth-model": "native",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
