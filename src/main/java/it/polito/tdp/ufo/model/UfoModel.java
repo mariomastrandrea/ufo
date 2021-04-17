@@ -1,9 +1,24 @@
 package it.polito.tdp.ufo.model;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.Collection;
+import it.polito.tdp.ufo.db.SightingDAO;
 
 public class UfoModel
 {
-	List<String> ufoShapes = new ArrayList<>();
+	private SightingDAO dao;
+	
+	public UfoModel()
+	{
+		this.dao = new SightingDAO();
+	}
+	
+	public Collection<String> getAllShapes()
+	{
+		return this.dao.readShapes();
+	}
+	
+	public int getNumSightingsOf(String shape)
+	{
+		return this.dao.countByShape(shape);
+	}
 }

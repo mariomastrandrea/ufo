@@ -11,64 +11,67 @@ public class SightingDAO
 {
 	public List<String> readShapes()  
 	{
-		List<String> formeUfo;
+		List<String> formeUfo = new ArrayList<>();
+		
 		try
 		{
-			Connection conn = DBConnect.getConnection();	 
+			Connection connection = DBConnect.getConnection(); 
 			
-			String sql = "SELECT DISTINCT shape " +
+			String sqlQuery = "SELECT DISTINCT shape " +
 						 "FROM sighting " +
-						 "WHERE shape<>'' " +
+						 "WHERE shape<>'' AND shape IS NOT NULL " +
 						 "ORDER BY shape ASC";
-				
+							
 			//ResultSet result = statement.executeQuery(sql); //utile solo per query di tipo SELECT
 															 //per INSERT e UPDATE utilizzare .executeUpdate()
 				
-			PreparedStatement prepStatement = conn.prepareStatement(sql);
+			PreparedStatement prepStatement = connection.prepareStatement(sqlQuery);
 			ResultSet result = prepStatement.executeQuery();
-					
-			formeUfo = new ArrayList<>();
-				
+									
 			while(result.next())
 			{
-				String formaTemp = result.getString("shape");
-				formeUfo.add(formaTemp);
+				String shape = result.getString("shape");
+				formeUfo.add(shape);
 			}
-			System.out.println(formeUfo);
-			prepStatement.close();
+			
 			result.close();
+			prepStatement.close();
+			connection.close();
 		}
 		catch(SQLException sqle)
 		{
-			throw new RuntimeException("Database error in readShape", sqle);
+			throw new RuntimeException("Database error in readShapes()", sqle);
 		}
-		return formeUfo;
 		
+		return formeUfo;
 	}
 	
 	public int countByShape(String shape)
 	{
-		int count;
+		int count = 0;
+		
 		try
 		{
-			Connection conn = DBConnect.getConnection();	 
+			Connection connection = DBConnect.getConnection();	 
 			
-			String sql2 = "SELECT COUNT(*) FROM sighting WHERE shape= ? ";
-			String shapeScelta = shape;
+			String sqlQueryTemplate = "SELECT COUNT(*) AS numShapes FROM sighting WHERE shape=? ";
 			
-			PreparedStatement st2 = conn.prepareStatement(sql2);
-			st2.setString(1, shapeScelta);
+			PreparedStatement statement = connection.prepareStatement(sqlQueryTemplate);
+			statement.setString(1, shape);
+			ResultSet result = statement.executeQuery();
 			
-			ResultSet result2 = st2.executeQuery();
-			result2.first();
-			count = result2.getInt("COUNT(*)");
-			st2.close();
-			result2.close();
+			result.first();
+			count = result.getInt("numShapes");
+			
+			result.close();
+			statement.close();
+			connection.close();
 		}
 		catch(SQLException sqle)
 		{
-			throw new RuntimeException("Database error in countByShape", sqle);
+			throw new RuntimeException("Database error in countByShape()", sqle);
 		}
+		
 		return count;
 	}
 
